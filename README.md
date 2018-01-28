@@ -14,7 +14,7 @@ npm install --production
 npm start
 ```
 
-This will start the application and leave it running via [pm2](). You 
+This will start the application and leave it running via [pm2](https://github.com/Unitech/pm2). You 
 can stop/manage the application by using `npx pm2` followed by the pm2 
 commands found on the linked page.
 
