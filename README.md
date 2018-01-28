@@ -4,6 +4,8 @@
 
 # Installation
 ```
+git clone https://github.com/AngeloR/newsriver.git newsriver
+cd newsriver
 npm install --production
 ```
 
