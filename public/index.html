@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+    <head>
+        <title>River</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./default.css" />
+        <script src="./app.js"></script>
+    </head>
+    <body>
+        <div id="nav">
+            <a href="#" id="title">River:</a>
+            <div id="tagline"></div>
+        </div>
+        <div id="river">
+        </div>
+        <div id="footer">
+            Want to create your own custom river? Fork this project on <a href="#">GitHub</a> for a free, 1-click deploy
+        </div>
+    </body>
+    <script>
+const app = new App({
+    api: 'http://localhost:8000/api/v1'
+});
+app.start();
+    </script>
+</html>

@@ -1,0 +1,28 @@
+{
+    "name": "river",
+    "author": "Angelo R <xangelo@gmail.com>",
+    "version": "0.0.1",
+    "scripts": {
+        "dev:server": "DEBUG=app:* PORT=8000 npx nodemon api.js",
+        "dev:ingest": "DEBUG=app:* node ingest.js",
+        "start:api": "npx pm2 start ecosystem.config.js --only API",
+        "stop:api": "npx pm2 stop API",
+        "start:ingest": "npx pm2 start ecosystem.config.js --only INGEST",
+        "stop:ingest": "npx pm2 stop INGEST",
+        "start": "npx pm2 start ecosystem.config.js --env production",
+        "stop": "npx pm2 stop all"
+    },
+    "dependencies": {
+        "debug": "^3.1.0",
+        "ioredis": "^3.2.2",
+        "moment": "^2.20.1",
+        "pm2": "^2.9.3",
+        "request": "^2.83.0",
+        "rss-parser": "^3.0.1"
+    },
+    "devDependencies": {
+        "chai": "^4.1.2",
+        "mocha": "^5.0.0",
+        "nodemon": "^1.14.11"
+    }
+}

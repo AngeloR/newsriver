@@ -1,0 +1,32 @@
+[
+    {
+        "title": "/r/aws",
+        "parser": "reddit",
+        "url": "https://www.reddit.com/r/aws/new.json"
+    },
+    {
+        "title": "/r/sysadmin",
+        "parser": "reddit",
+        "url": "https://www.reddit.com/r/sysadmin/new.json"
+    },
+    {
+        "title": "/r/netsec",
+        "parser": "reddit",
+        "url": "https://www.reddit.com/r/netsec/new.json"
+    },
+    {
+        "title": "/r/networking",
+        "parser": "reddit",
+        "url": "https://www.reddit.com/r/networking/new.json"
+    },
+    {
+        "title": "/r/devops",
+        "parser": "reddit",
+        "url": "https://www.reddit.com/r/devops/new.json"
+    },
+    {
+        "title": "hn",
+        "parser": "rss",
+        "url": "https://news.ycombinator.com/rss"
+    }
+]

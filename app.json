@@ -1,0 +1,14 @@
+{
+    "name": "river",
+    "description": "launch a customized news feed",
+    "repository": "https://github.com/angelor/newsriver",
+    "keywords": [
+        "node", "river", "news"
+    ],
+    "image": "heroku/node",
+    "addons": [
+        {
+            "plan": "heroku-redis:hobby-dev"
+        }
+    ]
+}
