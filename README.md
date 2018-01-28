@@ -24,10 +24,11 @@ Edit the `data/sources.json` file adding a new element as outlined below
 ```
 {
     "title": "Name of the feed",
-    "parser": One of [reddit] ,
+    "parser": One of [reddit | rss] ,
     "url": "http link to the page to parse"
 }
 ```
 
 # Supported Parsers  
 1. Reddit
+2. RSS
