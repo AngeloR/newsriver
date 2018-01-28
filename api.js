@@ -3,11 +3,28 @@
 const Server = require('./lib/server');
 const redis = require('./lib/redis');
 const dateUtils = require('./lib/date');
+const fs = require('fs');
 const debug = require('debug')('app:api');
 
 const server = new Server({
     port: process.env.PORT
 });
+
+function loadStaticFile(api, req, res) {
+    fs.readFile('./public/'+req.url, (err, data) => {
+        if(err) {
+            debug(err);
+            res.statusCode = 500;
+            res.end();
+            return;
+        }
+
+        res.statusCode = 200;
+        res.end(data);
+    });
+}
+
+server.get('^\/(.*)\.(js|html|css)', loadStaticFile);
 
 server.get('/api/v1/sources', (api, req, res) => {
     res.end(JSON.stringify(require('./data/sources.json')));
