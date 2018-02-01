@@ -3,19 +3,15 @@
     "author": "Angelo R <xangelo@gmail.com>",
     "version": "0.0.1",
     "scripts": {
-        "dev:server": "DEBUG=app:* PORT=8000 npx nodemon api.js",
-        "dev:ingest": "DEBUG=app:* node ingest.js",
-        "start:api": "npx pm2 start ecosystem.config.js --env dev --only API",
-        "stop:api": "npx pm2 stop API",
-        "start:ingest": "npx pm2 start ecosystem.config.js --env dev --only INGEST",
-        "stop:ingest": "npx pm2 stop INGEST",
-        "start": "node heroku.js"
+        "dev:server": "DEBUG=app* PORT=8000 npx nodemon api.js",
+        "dev:ingest": "DEBUG=app* node ingest.js",
+        "dev": "DEBUG=app* PORT=8000 node main.js",
+        "start": "node main.js"
     },
     "dependencies": {
         "debug": "^3.1.0",
         "ioredis": "^3.2.2",
         "moment": "^2.20.1",
-        "pm2": "^2.9.3",
         "request": "^2.83.0",
         "rss-parser": "^3.0.1"
     },

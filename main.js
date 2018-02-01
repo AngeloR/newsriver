@@ -1,14 +1,14 @@
 'use strict';
 
 const cluster = require('cluster');
+const debug = require('debug')('app');
 
 if(cluster.isMaster) {
-    // in the master process we start the api
     cluster.fork();
     require('./api');
-    console.log('starting api');
+    debug('starting api');
 }
 else {
     require('./ingest');
-    console.log('starting ingester');
+    debug('starting ingester');
 }
