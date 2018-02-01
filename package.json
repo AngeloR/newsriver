@@ -9,8 +9,7 @@
         "stop:api": "npx pm2 stop API",
         "start:ingest": "npx pm2 start ecosystem.config.js --env dev --only INGEST",
         "stop:ingest": "npx pm2 stop INGEST",
-        "start": "npx pm2 start ecosystem.config.js --env prod",
-        "stop": "npx pm2 stop all"
+        "start": "node heroku.js"
     },
     "dependencies": {
         "debug": "^3.1.0",
