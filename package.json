@@ -5,11 +5,11 @@
     "scripts": {
         "dev:server": "DEBUG=app:* PORT=8000 npx nodemon api.js",
         "dev:ingest": "DEBUG=app:* node ingest.js",
-        "start:api": "npx pm2 start ecosystem.config.js --only API",
+        "start:api": "npx pm2 start ecosystem.config.js --env dev --only API",
         "stop:api": "npx pm2 stop API",
-        "start:ingest": "npx pm2 start ecosystem.config.js --only INGEST",
+        "start:ingest": "npx pm2 start ecosystem.config.js --env dev --only INGEST",
         "stop:ingest": "npx pm2 stop INGEST",
-        "start": "npx pm2 start ecosystem.config.js --env production",
+        "start": "npx pm2 start ecosystem.config.js --env prod",
         "stop": "npx pm2 stop all"
     },
     "dependencies": {
