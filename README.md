@@ -2,6 +2,16 @@
     <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
 
+# NewsRiver
+This is a constantly updating list of articles from the preconfigured sites. 
+You can set whatever sites you want to watch (rss and reddit parsers are 
+available) and then the page will reload with new articles from these 
+locations.
+
+I love keeping up with new news.. but I don't have the time to really watch 
+everything. This allows me a super easy way to keep track of the most recent 
+news I want.
+
 # Quick Start
 1. Fork the repo
 2. Edit the `data/sources.json` file adding whatever sources you would like
