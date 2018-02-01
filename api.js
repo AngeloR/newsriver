@@ -24,6 +24,11 @@ function loadStaticFile(api, req, res) {
     });
 }
 
+server.get('/$', (api, req, res) => {
+    req.url = 'index.html';
+    loadStaticFile(api, req, res);
+});
+
 server.get('^\/(.*)\.(js|html|css)', loadStaticFile);
 
 server.get('/api/v1/sources', (api, req, res) => {
