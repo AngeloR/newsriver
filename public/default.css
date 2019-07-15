@@ -54,6 +54,14 @@ a {
 .item .details {
     font-size: 0.7em;
 }
+.item .details a {
+	font-size: 100%;
+	text-decoration: none;
+	color: #000;
+}
+.item .details a:hover {
+	text-decoration: underline;
+}
 .item .date {
     color: #888;
 }
