@@ -21,7 +21,8 @@ class RssIngester extends Ingester {
                     const item = Item.Parse({
                         title: raw_item.title,
                         link: raw_item.link,
-                        create_date: (new Date(Date.parse(raw_item.pubDate))).getTime()
+                        create_date: (new Date(Date.parse(raw_item.pubDate))).getTime(),
+                        comments: raw_item.comments
                     });
 
                     items.push(item);
