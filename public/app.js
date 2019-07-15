@@ -62,11 +62,14 @@ class App {
 
         items.forEach(item => {
             const link = document.createElement('a');
+			const host = document.createElement('a');
+
+			host.href = item.comments;
             link.href = item.link;
             html += `<div class="item">
                 <a href="${item.link}">${item.title}</a>
                 <div class="details">
-                    Posted on ${link.hostname}, 
+                    Posted on <a href="${item.comments}">${host.hostname}</a>, 
                     <span class="date">${this.formatDate(item.create_date)}</span>
                 </div>
             </div>
