@@ -53,8 +53,10 @@ class App {
 
     formatDate(dateString) {
         let date = new Date(parseInt(dateString));
-
-        return date.toString();
+        return {
+            estimate: moment(date).fromNow(),
+            exact: date.toString()
+        };
     }
 
     renderItems(items) {
@@ -62,7 +64,8 @@ class App {
 
         items.forEach(item => {
             const link = document.createElement('a');
-			const host = document.createElement('a');
+            const host = document.createElement('a');
+            const date = this.formatDate(item.create_date);
 
 			host.href = item.comments;
             link.href = item.link;
@@ -70,7 +73,7 @@ class App {
                 <a href="${item.link}">${item.title}</a>
                 <div class="details">
                     Posted on <a href="${item.comments}">${host.hostname}</a>, 
-                    <span class="date">${this.formatDate(item.create_date)}</span>
+                    <span class="date" title="${date.exact}">${date.estimate}</span>
                 </div>
             </div>
             `;
