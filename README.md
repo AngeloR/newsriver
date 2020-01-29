@@ -22,7 +22,7 @@ news I want.
 ## Requirements
 - Redis 4+ This has only been tested on versions 4+ but it uses pretty standard 
 redis interactions on sets and the expire command.
-- Node 8+ This has only been tested on versions 8+ of node
+- Node v12.x.x
 
 ## Installation
 ```
