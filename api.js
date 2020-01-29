@@ -1,5 +1,5 @@
 'use strict';
-
+require('dotenv').config();
 const Server = require('./lib/server');
 const redis = require('./lib/redis');
 const dateUtils = require('./lib/date');

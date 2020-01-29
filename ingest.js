@@ -1,5 +1,6 @@
 'use strct';
 
+require('dotenv').config();
 const debug = require('debug')('app:ingest');
 const Sources = require('./data/sources.json');
 const redis = require('./lib/redis');
