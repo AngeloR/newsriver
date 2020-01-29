@@ -13,6 +13,7 @@ a {
     position: fixed;
     width: 100%;
     top: 0;
+    z-index: 5;
 }
 #nav {
     width: 70%;
@@ -36,6 +37,7 @@ a {
     border-left-width: 15px;
     padding-left: 5px;
     margin-right: 10px;
+    cursor: pointer;
 }
 #tagline .site:last-child :content-after {
     content: "";
@@ -82,4 +84,7 @@ a {
 }
 .item .date {
     color: #888;
+}
+.site.fade, .item.fade {
+    opacity: 0.3;
 }

@@ -1,5 +1,18 @@
 'use strict';
 
+function $(thing) {
+    let doc = document.querySelectorAll(thing);
+
+    if(doc instanceof NodeList) {
+        const convert = Array.from(doc);
+        if(convert.length === 1) {
+            return convert[0];
+        }
+        return convert;
+    }
+    return doc;
+}
+
 class App {
     constructor(options) {
         this.interval;
@@ -10,6 +23,11 @@ class App {
 
         this.nextKey = this.setFirstKey();
 
+        this.activeFilter;
+
+        this.bodyEvents = {
+            click: []
+        };
     }
 
     setFirstKey() {
@@ -22,9 +40,77 @@ class App {
         return `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}@${d.getUTCHours()}:${d.getUTCMinutes()}:${d.getUTCSeconds()}`;
     }
 
+    bodyEventFilter(eventType, e) {
+        const events = this.bodyEvents[eventType];
+        events.forEach(event => {
+            const matches = $(event.target);
+            if(matches.length > 1) {
+                matches.forEach(match => {
+                    if(e.target === match) {
+                        event.handler(e, match);
+                    }
+                });
+            }
+            else {
+                if(e.target === match) {
+                    event.handler(e, match);
+                }
+            }
+        });
+    }
+
+    bindEvents() {
+        $('body').addEventListener('click', this.bodyEventFilter.bind(this, 'click'));
+
+        this.bodyEvents.click.push({
+            target: '.site',
+            handler: this.toggler.bind(this)
+        });
+    }
+
+    toggler(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        let skip = false;
+
+        $('.item').forEach(el => {
+            el.classList.remove('fade');
+        });
+
+        if(!e.target.classList.contains('fade') && this.activeFilter) {
+            $('.site').forEach(el => el.classList.remove('fade'));
+            this.activeFilter = undefined;
+            skip = true;
+        }
+
+        if(skip)
+            return;
+
+        $('.site').filter(el => {
+            if(el.attributes['data-unique-id'].value !== e.target.attributes['data-unique-id'].value) {
+                el.classList.add('fade');
+                return true;
+            }
+            this.activeFilter = el.attributes['data-unique-id'].value;
+            el.classList.remove('fade');
+            return false;
+        }).forEach(el => {
+            const els = $(`.item[data-unique-id=${el.attributes['data-unique-id'].value}]`);
+            if(els.forEach) {
+                els.forEach(el => el.classList.add('fade'));
+            }
+            else {
+                els.classList.add('fade');
+            }
+        });
+    }
+
     start() {
         console.info('App Started');
         console.info(`Polling every ${this.pollInterval / 1000 / 60} minutes`);
+
+        this.bindEvents();
 
         this.interval = setInterval(() => {
             this.poll(this.nextKey);
@@ -39,7 +125,7 @@ class App {
 
                 let html = [];
                 sources.forEach(source => {
-                    html.push(`<span class="site" style="border-color:#${source.tag_color}">${source.title}</span>`);
+                    html.push(`<span class="site" data-unique-id="id-${source.tag_color}" style="border-color:#${source.tag_color}">${source.title}</span>`);
                 });
 
                 el.innerHTML = html.join(' ');
@@ -69,7 +155,7 @@ class App {
 
 			host.href = item.comments;
             link.href = item.link;
-            html += `<div class="item" style="border-color:#${item.tag_color}">
+            html += `<div class="item" style="border-color:#${item.tag_color}" data-unique-id="id-${item.tag_color}">
                 <a href="${item.link}">${item.title}</a>
                 <div class="details">
                     Posted on <a href="${item.comments}">${host.hostname}</a>, 
