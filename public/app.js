@@ -39,10 +39,10 @@ class App {
 
                 let html = [];
                 sources.forEach(source => {
-                    html.push(`<span class="site">${source.title}</span>`);
+                    html.push(`<span class="site" style="border-color:#${source.tag_color}">${source.title}</span>`);
                 });
 
-                el.innerHTML = html.join(', ');
+                el.innerHTML = html.join(' ');
             })
         );
     }
@@ -66,7 +66,7 @@ class App {
 
 			host.href = item.comments;
             link.href = item.link;
-            html += `<div class="item">
+            html += `<div class="item" style="border-color:#${item.tag_color}">
                 <a href="${item.link}">${item.title}</a>
                 <div class="details">
                     Posted on <a href="${item.comments}">${host.hostname}</a>, 
