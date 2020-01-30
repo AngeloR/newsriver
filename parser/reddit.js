@@ -17,6 +17,7 @@ class RedditIngester extends Ingester {
                 title: child.data.title,
                 link: `https://www.reddit.com${child.data.permalink}`,
                 create_date: child.data.created * 1000,
+                source_title: this.source.title,
                 comments: `https://www.reddit.com${child.data.permalink}`,
             });
 

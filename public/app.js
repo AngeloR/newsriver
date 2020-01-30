@@ -150,15 +150,13 @@ class App {
 
         items.forEach(item => {
             const link = document.createElement('a');
-            const host = document.createElement('a');
             const date = this.formatDate(item.create_date);
 
-			host.href = item.comments;
             link.href = item.link;
             html += `<div class="item" style="border-color:#${item.tag_color}" data-unique-id="id-${item.tag_color}">
                 <a href="${item.link}">${item.title}</a>
                 <div class="details">
-                    Posted on <a href="${item.comments}">${host.hostname}</a>, 
+                    <a href="${item.comments}">${item.source_title}</a>, 
                     <span class="date" title="${date.exact}">${date.estimate}</span>
                 </div>
             </div>
