@@ -170,6 +170,15 @@ class App {
 
     poll(key) {
         console.info(`Polling with key ${key}`);
+        // before we poll, lets increment all the existing dates!
+        $('.item .date').forEach(el => {
+            const date = new Date(el.attributes['title'].value);
+
+            const formatDate = this.formatDate(date.getTime());
+
+            el.attributes['title'].value = formatDate.exact;
+            el.innerHTML = formatDate.estimate;
+        });
         this.ajax(
             'get', '/list/since/'+key,
             (r) => {
