@@ -75,6 +75,7 @@ server.get('/$', (api, req, res) => {
 server.get('^\/(.*)\.(js|html|css|png)', loadStaticFile);
 
 server.get('/api/v1/sources', (api, req, res) => {
+    res.setHeader('Content-Type', 'text/html');
     res.end(JSON.stringify(sources));
 });
 
@@ -119,6 +120,7 @@ server.get('/api/v1/list/since/(.*)', (api, req, res) => {
                         }
                     });
 
+                    res.setHeader('Content-Type', 'application/json');
                     res.end(JSON.stringify({
                         nextKey: dateUtils.dateToBucketKey(stopDate),
                         items: items
