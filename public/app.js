@@ -19,7 +19,7 @@ class App {
 
         this.options = options;
         this.pollInterval = 1000 * 60 * 5; // 5 minutes
-        this.history = 60 * 12; // last 4 hours
+        this.history = 1000 * 60 * 60 * 4; // last 4 hours
 
         this.nextKey = this.setFirstKey();
 
@@ -31,13 +31,7 @@ class App {
     }
 
     setFirstKey() {
-        let d = new Date();
-        // just round to the nearest hour?
-        d.setUTCMinutes(0);
-        d.setUTCSeconds(0);
-        d.setUTCMinutes(d.getUTCMinutes() - this.history);
-
-        return `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}@${d.getUTCHours()}:${d.getUTCMinutes()}:${d.getUTCSeconds()}`;
+		return Date.now() - this.history;
     }
 
     bodyEventFilter(eventType, e) {
@@ -154,9 +148,9 @@ class App {
 
             link.href = item.link;
             html += `<div class="item" style="border-color:#${item.tag_color}" data-unique-id="id-${item.tag_color}">
-                <a href="${item.link}">${item.title}</a>
+                <a href="${item.data.link}">${item.data.title}</a>
                 <div class="details">
-                    <a href="${item.comments}">${item.source_title}</a>, 
+                    <a href="${item.data.comments}">${item.source_title}</a>, 
                     <span class="date" title="${date.exact}">${date.estimate}</span>
                 </div>
             </div>
