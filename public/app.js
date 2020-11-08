@@ -119,7 +119,7 @@ class App {
 
                 let html = [];
                 sources.forEach(source => {
-                    html.push(`<span class="site" data-unique-id="id-${source.tag_color}" style="border-color:#${source.tag_color}">${source.title}</span>`);
+                    html.push(`<a class="site" data-unique-id="id-${source.tag_color}" style="border-color:#${source.tag_color}">${source.title}</a>`);
                 });
 
                 el.innerHTML = html.join(' ');
