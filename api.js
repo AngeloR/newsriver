@@ -61,7 +61,7 @@ server.get('/api/v1/list/since/(.*)', async (api, req, res) => {
 
 		res.setHeader('Content-Type', 'application/json');
 		res.end(JSON.stringify({
-			nextKey: items.length > 0 ? items[items.length-1].processed_date + 1 : since_date,
+			nextKey: items.length > 0 ? items[0].processed_date + 1 : since_date,
 			items: items
 		}));
 	}
