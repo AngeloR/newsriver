@@ -27,7 +27,7 @@
     {
         "title": "hn",
         "parser": "rss",
-        "url": "https://news.ycombinator.com/rss",
+        "url": "https://hnrss.org/newest",
         "tag_color": "ff6600"
     }
 ]
