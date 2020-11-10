@@ -57,7 +57,7 @@ class App {
         $('body').addEventListener('click', this.bodyEventFilter.bind(this, 'click'));
 
         this.bodyEvents.click.push({
-            target: '.site',
+            target: '.source',
             handler: this.toggler.bind(this)
         });
     }
@@ -73,7 +73,7 @@ class App {
         });
 
         if(!e.target.classList.contains('fade') && this.activeFilter) {
-            $('.site').forEach(el => el.classList.remove('fade'));
+            $('.source').forEach(el => el.classList.remove('fade'));
             this.activeFilter = undefined;
             skip = true;
         }
@@ -81,7 +81,7 @@ class App {
         if(skip)
             return;
 
-        $('.site').filter(el => {
+        $('.source').filter(el => {
             if(el.attributes['data-unique-id'].value !== e.target.attributes['data-unique-id'].value) {
                 el.classList.add('fade');
                 return true;
@@ -115,11 +115,11 @@ class App {
         this.ajax(
             'get', '/sources', (res => {
                 const sources = JSON.parse(res.responseText);
-                const el = document.querySelector('#tagline');
+                const el = document.querySelector('#sources-list');
 
                 let html = [];
                 sources.forEach(source => {
-                    html.push(`<a class="site" data-unique-id="id-${source.tag_color}" style="border-color:#${source.tag_color}">${source.title}</a>`);
+                    html.push(`<a class="source navbar-item" data-unique-id="id-${source.tag_color}" style="border-color:#${source.tag_color}">${source.title}</a>`);
                 });
 
                 el.innerHTML = html.join(' ');
@@ -147,17 +147,17 @@ class App {
             const date = this.formatDate(item.create_date);
 
             link.href = item.link;
-            html += `<div class="item" style="border-color:#${item.tag_color}" data-unique-id="id-${item.tag_color}">
+            html += `<div class="block item" style="border-color:#${item.tag_color}" data-unique-id="id-${item.tag_color}">
                 <a href="${item.data.link}">${item.data.title}</a>
-                <div class="details">
-                    <a href="${item.data.comments}">${item.source_title}</a>, 
-                    <span class="date" title="${date.exact}">${date.estimate}</span>
+                <div class="details is-size-7">
+                    <a href="${item.data.comments}">${item.source_title} </a>, 
+                    <span class="date has-text-grey" title="${date.exact}">${date.estimate}</span>
                 </div>
             </div>
             `;
         });
 
-        const $el = document.querySelector('#river');
+        const $el = document.querySelector('#column-1');
         // ensures that we put new things on top of the page
         $el.innerHTML = html += $el.innerHTML;
     }
