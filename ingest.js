@@ -3,7 +3,7 @@
 require('dotenv').config();
 const debug = require('debug')('app:ingest');
 const Sources = require('./data/sources.json');
-const redis = require('./lib/redis');
+const db = require('./lib/db');
 
 function errorHandler(e) {
     debug(e);
@@ -21,7 +21,7 @@ Sources.forEach(source => {
         const Parser = require(`./parser/${source.parser}`);
         const parser = new Parser({
             source: source,
-            redis: redis
+			db: db
         });
 
         parser.on('error', errorHandler);

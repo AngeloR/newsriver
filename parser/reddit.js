@@ -16,7 +16,7 @@ class RedditIngester extends Ingester {
             const item = Item.Parse({
                 title: child.data.title,
                 link: `https://www.reddit.com${child.data.permalink}`,
-                create_date: child.data.created * 1000,
+                create_date: child.data.created_utc * 1000,
                 source_title: this.source.title,
                 comments: `https://www.reddit.com${child.data.permalink}`,
             });

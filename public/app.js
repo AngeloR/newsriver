@@ -19,7 +19,7 @@ class App {
 
         this.options = options;
         this.pollInterval = 1000 * 60 * 5; // 5 minutes
-        this.history = 60 * 12; // last 4 hours
+        this.history = 1000 * 60 * 60 * 4; // last 4 hours
 
         this.nextKey = this.setFirstKey();
 
@@ -31,13 +31,7 @@ class App {
     }
 
     setFirstKey() {
-        let d = new Date();
-        // just round to the nearest hour?
-        d.setUTCMinutes(0);
-        d.setUTCSeconds(0);
-        d.setUTCMinutes(d.getUTCMinutes() - this.history);
-
-        return `${d.getUTCFullYear()}-${d.getUTCMonth()}-${d.getUTCDate()}@${d.getUTCHours()}:${d.getUTCMinutes()}:${d.getUTCSeconds()}`;
+		return Date.now() - this.history;
     }
 
     bodyEventFilter(eventType, e) {
@@ -63,7 +57,7 @@ class App {
         $('body').addEventListener('click', this.bodyEventFilter.bind(this, 'click'));
 
         this.bodyEvents.click.push({
-            target: '.site',
+            target: '.source',
             handler: this.toggler.bind(this)
         });
     }
@@ -79,7 +73,7 @@ class App {
         });
 
         if(!e.target.classList.contains('fade') && this.activeFilter) {
-            $('.site').forEach(el => el.classList.remove('fade'));
+            $('.source').forEach(el => el.classList.remove('fade'));
             this.activeFilter = undefined;
             skip = true;
         }
@@ -87,7 +81,7 @@ class App {
         if(skip)
             return;
 
-        $('.site').filter(el => {
+        $('.source').filter(el => {
             if(el.attributes['data-unique-id'].value !== e.target.attributes['data-unique-id'].value) {
                 el.classList.add('fade');
                 return true;
@@ -121,11 +115,11 @@ class App {
         this.ajax(
             'get', '/sources', (res => {
                 const sources = JSON.parse(res.responseText);
-                const el = document.querySelector('#tagline');
+                const el = document.querySelector('#sources-list');
 
                 let html = [];
                 sources.forEach(source => {
-                    html.push(`<span class="site" data-unique-id="id-${source.tag_color}" style="border-color:#${source.tag_color}">${source.title}</span>`);
+                    html.push(`<a class="source navbar-item" data-unique-id="id-${source.tag_color}" style="border-color:#${source.tag_color}">${source.title}</a>`);
                 });
 
                 el.innerHTML = html.join(' ');
@@ -153,17 +147,17 @@ class App {
             const date = this.formatDate(item.create_date);
 
             link.href = item.link;
-            html += `<div class="item" style="border-color:#${item.tag_color}" data-unique-id="id-${item.tag_color}">
-                <a href="${item.link}">${item.title}</a>
-                <div class="details">
-                    <a href="${item.comments}">${item.source_title}</a>, 
-                    <span class="date" title="${date.exact}">${date.estimate}</span>
+            html += `<div class="block item" style="border-color:#${item.tag_color}" data-unique-id="id-${item.tag_color}">
+                <a href="${item.data.link}">${item.data.title}</a>
+                <div class="details is-size-7">
+                    <a href="${item.data.comments}">${item.source_title} </a>, 
+                    <span class="date has-text-grey" title="${date.exact}">${date.estimate}</span>
                 </div>
             </div>
             `;
         });
 
-        const $el = document.querySelector('#river');
+        const $el = document.querySelector('#column-1');
         // ensures that we put new things on top of the page
         $el.innerHTML = html += $el.innerHTML;
     }

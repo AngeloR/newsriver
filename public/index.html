@@ -1,32 +1,74 @@
 <!doctype html>
 <html>
-    <head>
-        <title>River</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="./default.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-        <script src="./app.js"></script>
-    </head>
-    <body>
-        <div id="nav-container">
-            <div id="nav">
-                <a href="#" id="title">River:</a>
-                <div id="tagline"></div>
-            </div>
-        </div>
-        <div id="river">
-        </div>
-        <div id="footer">
-           A project by <a href="https://xangelo.ca">xangelo</a>. 
-           <a href="https://github.com/AngeloR/newsriver">
-                <img src="./GitHub-Mark-32px.png" alt="Fork on GitHub" width="16px" height="16px" />
-            </a>
-        </div>
-    </body>
-    <script>
+	<head>
+		<meta charset="utf-8">
+		<title>News River: Bulma Edition</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+		<style>
+.item {
+	border-width: 0 0 0 8px;
+	border-style: solid;
+	padding-left: 8px;
+}
+.source {
+	border-width: 0 0 0 4px;
+	border-style: solid;
+}
+.fade {
+	opacity: 0.5;
+}
+		</style>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body class="has-navbar-fixed-top">
+		<nav class="navbar is-fixed-top is-info" role="navigation" aria-label="main navigation">
+			<div class="container">
+			<div class="navbar-brand">
+				<span class="navbar-item">NewsRiver</span>
+
+				<a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</a>
+			</div>
+
+			<div id="navbarBasicExample" class="navbar-menu">
+				<div class="navbar-start">
+					<div class="navbar-item has-dropdown is-hoverable">
+						<a class="navbar-link">
+							Sources
+						</a>
+						<div class="navbar-dropdown is-right" id="sources-list"></div>
+					</div>
+				</div>
+
+				<div class="navbar-end">
+					<div class="navbar-item has-dropdown is-hoverable">
+						<a class="navbar-link">About</a>
+						<div class="navbar-dropdown is-right">
+							<a class="navbar-item" href="https://github.com/angelor/newsriver">GitHub</a>
+							<hr class="navbar-divider">
+							<a class="navbar-item" href="https://github.com/AngeloR/newsriver/issues/new">Report an Issue</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</nav>
+		<div class="container mt-5">
+			<div class="columns">
+				<div class="column" id="column-1">
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<script src="./app.js"></script>
+	<script>
 const app = new App({
-    api: window.location.href + 'api/v1'
+	api: `${window.location.protocol}//${window.location.host}/api/v1`
 });
-app.start();
-    </script>
+	app.start();
+	</script>
 </html>
