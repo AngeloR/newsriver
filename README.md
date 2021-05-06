@@ -1,7 +1,3 @@
-<a href="https://heroku.com/deploy?template=https://github.com/angelor/newsriver/tree/master" target="_blank">
-    <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
-</a>
-
 # NewsRiver
 This is a constantly updating list of articles from the preconfigured sites. 
 You can set whatever sites you want to watch (rss and reddit parsers are 
@@ -15,28 +11,27 @@ news I want.
 # Quick Start
 1. Fork the repo
 2. Edit the `data/sources.json` file adding whatever sources you would like
-3. Click the "Deploy to Heroku" button and enjoy =)
+3. Copy the `.env.sample` file over to `.env` 
+4. Run `npm start` which starts up a local server on port 8000
 
 # Detailed Version
 
 ## Requirements
-- Redis 4+ This has only been tested on versions 4+ but it uses pretty standard 
-redis interactions on sets and the expire command.
 - Node v12.x.x
 
 ## Installation
 ```
-git clone https://github.com/AngeloR/newsriver.git newsriver
+git clone https://git.sr.ht/~xangelo/newsriver newsriver
 cd newsriver
 npm install --production
 ```
 
 ## Starting
-1. Set the `REDIS_URL` env variable to whatever your redis installation is
-2. Set the `PORT` env variable to whatever port you wnat to api to listen to
+1. Set the `PORT` env variable to whatever port you wnat to api to listen to
+2. Set the `PERSIST` env variable to teh name of the sqlite3 database
 
 ```
-REDIS_URL=redis://locahost:6379 PORT=8000 npm start
+PORT=8000 PERSIST=db.sqlite3 npm start
 ```
 
 This will start the application via the `cluster` module in node. It will 
